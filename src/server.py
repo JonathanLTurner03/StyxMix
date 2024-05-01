@@ -44,9 +44,6 @@ try:
 finally:
     pass
 
-print(f'Config: {config.get('name')}')
-print(f'Config: {type(config['author'])}')
-
 listener.register(zeroconf, config['name'], config['zeroconf']['desc'],
                   {'version': config['version'], 'author': config['author']}, config['zeroconf']['port'])
 

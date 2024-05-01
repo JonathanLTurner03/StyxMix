@@ -33,5 +33,5 @@ class ServicesRegistry(ServiceListener):
 
         Zeroconf().register_service(info)
         print(
-            f'Service registered under name: _{name.lower()}.tcp.local., description: {desc}._{name.lower()}._tcp.local., port: {port}'
+            f'Service registered under name: _{name.lower()}.tcp.local., description: {desc}._{name.lower()}._tcp.local., port: {port}',
             f' and properties: {props}')
