@@ -1,0 +1,11 @@
+---
+zeroconf:
+  enabled: true
+  port: 18200
+  desc: "Wireless Audio Mixer"
+name: "StyxMix"
+desc: "Python-based Wireless Windows Core Audio Mixer built for SBCs without modifying Windows output devices."
+version: "0.0.1-ALPHA"
+author: "Jonathan Turner"
+repo: "https://github.com/JonathanLTurner03/StyxMix"
+license: "MIT"
