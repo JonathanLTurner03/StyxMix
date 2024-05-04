@@ -1,23 +1,17 @@
-import zmq
-from ServicesRegistry import ServicesRegistry
-from zeroconf import ZeroconfServiceTypes
+# Port used 18200
+from zeroconf import Zeroconf
+import src.helper.ServicesRegistry as Registry
+import yaml
+import os
 
-print('\n'.join(ZeroconfServiceTypes.find()))
+config = {}
 
+if os.path.exists('config.yml'):
+    with open('config.yml', 'r') as file:
+        config = yaml.safe_load(file)
 
-context = zmq.Context()
+zeroconf = Zeroconf()
+# listener = Registry.ServicesRegistry()
 
-print("Connecting to hello world server...")
-socket = context.socket(zmq.REQ)
-socket.connect("tcp://localhost:18200")
-
-
-
-
-for request in range(10):
-    print(f"Sending request {request} ...")
-    socket.send(b"Hello")
-
-    message = socket.recv()
-    print(f"Received reply {request} [{message}]")
-
+Registry.register(zeroconf, config['name']+"test", config['zeroconf']['desc'],
+                  {'version': config['version'], 'author': config['author']}, config['zeroconf']['port'])
