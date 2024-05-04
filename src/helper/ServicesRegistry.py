@@ -5,8 +5,7 @@ import socket
 def register(zc: Zeroconf, name: str, desc: str, props: dict, port: int) -> None:
     global myInfo
 
-    local_ip = socket.gethostbyname(socket.gethostname())
-    address = socket.inet_aton(local_ip)
+    address = get_local_ipv4()
     fName = '_' + name.lower() + '._tcp.local.'
     fDesc = desc + '.' + fName
 
