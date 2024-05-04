@@ -1,6 +1,8 @@
 from zeroconf import Zeroconf, ServiceInfo
 import socket
 
+myInfo = None
+
 
 def register(zc: Zeroconf, name: str, desc: str, props: dict, port: int) -> None:
     global myInfo
@@ -40,7 +42,6 @@ def get_local_ipv4() -> str:
 
 
 class ServicesMonitor:
-
     def update_service(self, zeroconf, type, name):
         print("Service %s updated" % (name,))
 
