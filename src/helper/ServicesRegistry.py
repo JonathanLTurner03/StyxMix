@@ -21,7 +21,8 @@ def register(zc: Zeroconf, name: str, desc: str, props: dict, port: int) -> None
 
     Zeroconf().register_service(myInfo)
     print(
-        f'Service registered under name: _{name.lower()}.tcp.local., description: {desc}._{name.lower()}._tcp.local., port: {port}',
+        f'Service registered under name: _{name.lower()}.tcp.local., description: {desc}._{name.lower()}._tcp.local., '
+        f'port: {port}',
         f' and properties: {props}')
 
 
