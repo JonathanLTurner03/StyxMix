@@ -33,6 +33,13 @@ def unregister(zc: Zeroconf) -> None:
         print(f"Service not found")
 
 
+def get_local_ipv4() -> str:
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 80))
+    my_eip = s.getsockname()[0]
+    return my_eip
+
+
 class ServicesMonitor:
     def update_service(self, zeroconf, type, name):
         print("Service %s updated" % (name,))
