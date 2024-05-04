@@ -14,8 +14,6 @@ zeroconf = Zeroconf()
 listener = Registry.ServicesMonitor()
 browser = ServiceBrowser(zeroconf, "_styxmix._tcp.local.", listener)
 
-Registry.register(zeroconf, config['name'], config['zeroconf']['desc'],
-                  {'version': config['version'], 'author': config['author']}, config['zeroconf']['port'])
 
 try:
     input("Press enter to exit...\n\n")
