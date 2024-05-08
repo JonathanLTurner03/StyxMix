@@ -28,7 +28,7 @@ binding-lock:
   client: 192.168.1.x   # IP of the Client Device (i.e., Raspberry Pi)
   port: 18200           # Default Port
 
-
+multiple-hosts: false
 
 # Previous Connections / Bindings to allow for quick reconnection.
 # Example of Previous Connection
