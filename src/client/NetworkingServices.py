@@ -1,6 +1,16 @@
 import zmq
 from zeroconf import Zeroconf, ServiceInfo
-from src.handlers import ServicesMonitor
+import os
+import sys
+
+# Get the directory that contains the 'handlers' module
+handlers_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
+
+# Add the 'handlers' directory to the Python path
+sys.path.insert(0, handlers_dir)
+
+from handlers import ServicesMonitor
+
 
 myInfo = None
 

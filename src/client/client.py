@@ -3,7 +3,16 @@ from zeroconf import Zeroconf
 
 # Custom Module Imports
 import NetworkingServices as Network
-from src.handlers import FileReader
+import os
+import sys
+
+# Get the directory that contains the 'handlers' module
+handlers_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
+
+# Add the 'handlers' directory to the Python path
+sys.path.insert(0, handlers_dir)
+
+from handlers import FileReader, ServicesMonitor
 
 zeroconf = Zeroconf()
 filemanager = FileReader()

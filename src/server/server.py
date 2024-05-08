@@ -1,12 +1,20 @@
 # Port used 18200
 from zeroconf import Zeroconf, ServiceBrowser
-
-from src.handlers import FileReader, ServicesMonitor
+import sys
+import os
 import WindowsMixer as CoreAudio
-
 import zmq
 import socket
 import time
+
+# Get the directory that contains the 'handlers' module
+handlers_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
+
+# Add the 'handlers' directory to the Python path
+sys.path.insert(0, handlers_dir)
+
+from handlers import FileReader, ServicesMonitor
+
 
 zeroconf = Zeroconf()
 listener = ServicesMonitor()
