@@ -3,10 +3,7 @@ from zeroconf import Zeroconf
 
 # Custom Module Imports
 import NetworkingServices as Network
-from src.handlers import FileReader, ServicesMonitor
-
-# 0MQ imports
-import zmq
+from src.handlers import FileReader
 
 zeroconf = Zeroconf()
 filemanager = FileReader()
