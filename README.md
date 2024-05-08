@@ -29,6 +29,7 @@ and problematic if you are utilizing an Audio Interface. In my case, I have a Ro
 which handle my input and output mixing for my headphones and microphones, along with allowing for live compression, 
 noise gates, etc. This means that I cannot change my default audio device without introducing a lot of issues, such as
 delayed feedback.
+
 ---
 ### :level_slider: Why not [deej](https://github.com/omriharel/deej)?
 When researching to find a solution that did a potential fix for this issue, I came across deej. deej is a great project
@@ -41,6 +42,7 @@ the project hasn't been updated in quite a long time as far as I can tell. This 
 newer versions of Windows, or may have bugs that have been fixed in newer versions of Python. Along with that I wanted 
 to develop the project in Python to allow for more platform independent development with the potential ability to support 
 Linux in the future.
+
 ---
 ## :calendar: Road Maps
 This roadmap is a high-level overview of the features and enhancements that are planned for StyxMix. It is subject to 
