@@ -1,4 +1,5 @@
 pyzmq~=26.0.3
 zeroconf~=0.132.2
 PyYAML~=6.0.1
-psutil~=5.9.8
+comtypes~=1.4.2
+pycaw~=20240210
