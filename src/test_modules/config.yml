@@ -1,0 +1,83 @@
+#--------------------------------#
+# StyxMix Configuration File
+# -------------------------------#
+# This file is used to and save
+# configuration settings for the
+# StyxMix application for both
+# the client and host devices.
+# ------------------------------ #
+---
+# Configuration for Client Discovery
+zeroconf:
+  enabled: true
+  port: 18200
+  desc: "Wireless Audio Mixer"
+
+# Basic configuration for Versioning, Authorship, and Description.
+name: "StyxMix"
+desc: "Python-based Wireless Windows Core Audio Mixer built for SBCs without modifying Windows output devices."
+version: "1.0.0-alpha"
+author: "Jonathan Turner"
+repo: "https://github.com/JonathanLTurner03/StyxMix"
+license: "MIT"
+
+# Configuration to allow for specifying the IP of the Host and Client Device to prevent binding issues.
+binding-lock:
+  enabled: false
+  host: [192.168.1.x]   # IP(s) of Hosts (i.e., Windows PC)
+  client: 192.168.1.x   # IP of the Client Device (i.e., Raspberry Pi)
+  port: 18200           # Default Port
+
+multiple-hosts: false
+
+# Previous Connections / Bindings to allow for quick reconnection.
+# Example of Previous Connection
+# previous-connections:
+#  enabled: true
+#  client:
+#    ip: "192.168.1.x"
+#    host-name: "Raspberry Pi"
+#    port: 18200
+#  hosts:
+#    count: 1
+#    info: [
+#      {
+#        host: "192.168.1.x",
+#        host-name: "Windows PC",
+#        client: "192.168.1.x",
+#        port: 18200
+#      }
+#    ]
+
+previous-connections:
+  enabled: true
+  # List of Previous Connections
+  client: "None"
+  hosts:
+    count: 0
+    info: []
+
+# Auto-Update Configuration
+auto-update:
+  enabled: true
+  interval: "Startup"   # Options: "Startup", "Day", "Week", "Month"
+  unit: "none"          # Options: "none", integer (i.e., 1, 2, 3, etc.)
+  last-update: "Never"  # Last time the application was updated, (i.e., "Never", "2021-01-01")
+
+# GPIO Configuration
+rotary-encoder:
+  count: 1 # Number of Rotary Encoders
+
+  # Rotary Encoder Configuration
+  encoders: [
+    {
+      index = 0,       # Index of the Rotary Encoder
+      enabled: true,  # Enable the Rotary Encoder
+      pin-a: 17,      # GPIO Pin for Encoder A
+      pin-b: 18,      # GPIO Pin for Encoder B
+      pin-sw: 27,     # GPIO Pin for Switch
+      debounce: 0.1,  # Number of Steps to Increment/Decrement
+      steps: 1        # Number of Steps to Increment/Decrement
+    }
+  ]
+

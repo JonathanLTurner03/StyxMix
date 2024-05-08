@@ -71,6 +71,7 @@ class DeviceBinding:
                     print(f"Host IP: {host_ip}")
                     # Send reply back to host
                     self.socket.send_string(f"StyxMix Handshake: Successful.")
+                    self.socket.recv_string()
                     init_con = True
                 else:
                     print("Host IP not found.")
