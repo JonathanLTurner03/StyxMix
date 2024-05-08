@@ -41,7 +41,7 @@ to develop the project in Python to allow for more platform independent developm
 Linux in the future.
 
 ---
-## :calendar: Road Maps
+## :construction: Road Maps
 This roadmap is a high-level overview of the features and enhancements that are planned for StyxMix. It is subject to 
 change and will be updated as new features are added, and others are completed. The way these features are implemented 
 may depend on version to version depending on the features of the library.
