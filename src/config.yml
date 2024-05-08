@@ -16,7 +16,7 @@ zeroconf:
 # Basic configuration for Versioning, Authorship, and Description.
 name: "StyxMix"
 desc: "Python-based Wireless Windows Core Audio Mixer built for SBCs without modifying Windows output devices."
-version: "1.0.0-ALPHA"
+version: "1.0.0-alpha"
 author: "Jonathan Turner"
 repo: "https://github.com/JonathanLTurner03/StyxMix"
 license: "MIT"

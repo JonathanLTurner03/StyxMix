@@ -11,8 +11,8 @@ import yaml
 # Class is used to help elevate the script to
 # admin permissions if it is not already
 # ---------------------------------------------- #
-# Developed in:     1.0.0-ALPHA
-# Last Edited In:   1.0.0-ALPHA
+# Developed in:     1.0.0-alpha
+# Last Edited In:   1.0.0-alpha
 # Author:           Jonathan Turner
 class AdminElevator:
     # Checks if the script is running with admin permissions
@@ -34,8 +34,8 @@ class AdminElevator:
 # Used to read the config file for the
 # client and server
 # ---------------------------------------- #
-# Developed in:     1.0.0-ALPHA
-# Last Edited In:   1.0.0-ALPHA
+# Developed in:     1.0.0-alpha
+# Last Edited In:   1.0.0-alpha
 # Author:           Jonathan Turner
 class FileReader:
     path = None
