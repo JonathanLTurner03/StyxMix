@@ -1,7 +1,7 @@
 # Implemented purely for testing purposes.
 
 from zeroconf import ServiceBrowser, Zeroconf
-from src.client import ServicesRegistry as Registry
+from src.client import NetworkingServices as Registry
 
 from zeroconf import ZeroconfServiceTypes
 print('\n'.join(ZeroconfServiceTypes.find()))
