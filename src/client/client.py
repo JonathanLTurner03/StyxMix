@@ -1,22 +1,20 @@
 # zeroconf imports
 from zeroconf import Zeroconf
-import src.helper.ServicesRegistry as Registry
+import sys
+
+sys.path.append('../src')
+
+# Custom Module Imports
+import ServicesRegistry as Registry
+from src.handlers import FileReader
 
 # 0MQ imports
 import zmq
 
-# Misc imports
-import yaml
-import os
-
-# Loads configuration from config.yml
-config = {}
-if os.path.exists('config.yml'):
-    # Open the file in read mode and load the content into the config variable
-    with open('config.yml', 'r') as file:
-        config = yaml.safe_load(file)
+filemanager = FileReader()
 
 zeroconf = Zeroconf()
+config = filemanager.read_config()
 
 
 # Registers the service with the zeroconf instance.

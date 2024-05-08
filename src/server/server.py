@@ -1,6 +1,8 @@
 # Port used 18200
 from zeroconf import Zeroconf, ServiceBrowser
-import src.helper.ServicesRegistry as Registry
+
+import src.client.ServicesRegistry as Registry
+import WindowsMixer as CoreAudio
 
 import zmq
 import socket
@@ -11,13 +13,15 @@ import time
 
 config = {}
 
-if os.path.exists('config.yml'):
-    with open('config.yml', 'r') as file:
+if os.path.exists('../config.yml'):
+    with open('../config.yml', '') as file:
         config = yaml.safe_load(file)
 
 zeroconf = Zeroconf()
 listener = Registry.ServicesMonitor()
 browser = ServiceBrowser(zeroconf, "_styxmix._tcp.local.", listener)
+
+audio = CoreAudio.AudioController()
 
 context = zmq.Context()
 zmqComms = context.socket(zmq.REQ)
