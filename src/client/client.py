@@ -3,7 +3,7 @@ from zeroconf import Zeroconf
 
 # Custom Module Imports
 import ServicesRegistry as Registry
-from src.handlers import FileReader
+from src.handlers import FileReader, ServicesMonitor
 
 # 0MQ imports
 import zmq
@@ -11,6 +11,11 @@ import zmq
 zeroconf = Zeroconf()
 filemanager = FileReader()
 config = filemanager.read_config()
+
+# @TODO - Add error handling for pulling new config from github release.
+if config is False:
+    print("Config file not found. Exiting...")
+    exit()
 
 # Registers the service with the zeroconf instance.
 Registry.register(zeroconf, config['name'], config['zeroconf']['desc'],

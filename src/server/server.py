@@ -1,25 +1,24 @@
 # Port used 18200
 from zeroconf import Zeroconf, ServiceBrowser
 
-import src.client.ServicesRegistry as Registry
+from src.handlers import FileReader, ServicesMonitor
 import WindowsMixer as CoreAudio
 
 import zmq
 import socket
-
-import yaml
-import os
 import time
 
-config = {}
-
-if os.path.exists('../config.yml'):
-    with open('../config.yml', '') as file:
-        config = yaml.safe_load(file)
-
 zeroconf = Zeroconf()
-listener = Registry.ServicesMonitor()
+listener = ServicesMonitor()
 browser = ServiceBrowser(zeroconf, "_styxmix._tcp.local.", listener)
+
+filemanager = FileReader()
+config = filemanager.read_config()
+
+# @TODO - Add error handling for pulling new config from github release.
+if config is False:
+    print("Config file not found. Exiting...")
+    exit()
 
 audio = CoreAudio.AudioController()
 
@@ -36,7 +35,7 @@ while True:
         port = services.port
         zmqComms.connect(f"tcp://{ip_address}:{port}")
 
-        zmqComms.send_string("StyxMix Handshake: Host IP," + Registry.get_local_ipv4())
+        zmqComms.send_string("StyxMix Handshake: Host IP," + listener.get_local_ipv4())
         message = zmqComms.recv_string()
         if "StyxMix Handshake: Successful." in message:
             print("Connected to client.")

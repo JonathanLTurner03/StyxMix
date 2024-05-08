@@ -6,6 +6,8 @@ import ctypes
 # Config Imports
 import yaml
 
+# Service Monitor Imports
+import socket
 
 # ---------------------------------------------- #
 # Class is used to help elevate the script to
@@ -53,3 +55,23 @@ class FileReader:
                 return self.config
         else:
             return False
+
+
+class ServicesMonitor:
+    def update_service(self, zeroconf, type, name):
+        print("Service %s updated" % (name,))
+
+    def remove_service(self, zeroconf, type, name):
+        print("Service %s removed" % (name,))
+
+    def add_service(self, zeroconf, type, name):
+        info = zeroconf.get_service_info(type, name)
+        if info:
+            # print("Service %s added, service info: %s" % (name, info))
+            print("Service %s added, IP address: %s" % (name, socket.inet_ntoa(info.addresses[0])))
+
+    def get_local_ipv4(self) -> str:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('8.8.8.8', 80))
+        my_eip = s.getsockname()[0]
+        return my_eip
