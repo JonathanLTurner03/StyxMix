@@ -24,11 +24,8 @@ The idea for this project was due to the fact that different games and applicati
 different levels. This can be annoying when you are trying to listen to music and play a game at the same time. 
 
 While some headphones and interfaces have the ability to map applications to different channels, most do not. Along with
-this, some ways to accomplishing this goal requires you to change your default audio device, which can be annoying
-and problematic if you are utilizing an Audio Interface. In my case, I have a Rodecaster Duo and a Rodecaster Pro I,
-which handle my input and output mixing for my headphones and microphones, along with allowing for live compression, 
-noise gates, etc. This means that I cannot change my default audio device without introducing a lot of issues, such as
-delayed feedback.
+this, some ways to accomplishing this goal require you to change your default audio device, which can be annoying
+and problematic if you are utilizing an Audio Interface.
 
 ---
 ### :level_slider: Why not [deej](https://github.com/omriharel/deej)?
@@ -39,7 +36,7 @@ situation.
 
 Firstly, I wanted to allow wireless and wired connection, along with the ability to switch between devices. Secondly, 
 the project hasn't been updated in quite a long time as far as I can tell. This means that it may not work with
-newer versions of Windows, or may have bugs that have been fixed in newer versions of Python. Along with that I wanted 
+newer versions of Windows, or may have bugs that have been fixed in newer versions of Go. Along with that, I wanted 
 to develop the project in Python to allow for more platform independent development with the potential ability to support 
 Linux in the future.
 
