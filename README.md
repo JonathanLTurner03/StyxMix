@@ -59,7 +59,7 @@ may depend on version to version depending on the features of the library.
 ### Features
 |       Status       |   Feature    |                           Description                           | Implemented in |
 |:------------------:|:------------:|:---------------------------------------------------------------:|:--------------:|
-| :white_check_mark: | Auto Pairing |            Allows for dynamic discovery and binding.            |  1.0.0-ALPHA   |
+| :white_check_mark: | Auto Pairing |            Allows for dynamic discovery and binding.            |  1.0.0-alpha   |
 |     :calendar:     | Auto Update  |             Automatically updates the application.              |      :x:       |
 |     :calendar:     |  Auto Start  |              Automatically starts the application.              |      :x:       |
 |     :calendar:     |     GUI      | Allows for easy changing of configuration files within windows. |      :x:       |
@@ -68,7 +68,7 @@ may depend on version to version depending on the features of the library.
 ### Compatibility
 |   Status   |    Feature    |                       Description                       | Implemented in |
 |:----------:|:-------------:|:-------------------------------------------------------:|:--------------:|
-| :pushpin:  |  Windows 10   | Allows for the manipulation of the Windows Audio Mixer. |  1.0.0-ALPHA   |
+| :pushpin:  |  Windows 10   | Allows for the manipulation of the Windows Audio Mixer. |  1.0.0-alpha   |
 | :calendar: | Linux Support |          Allows for the manipulation of ALSA.           |      :x:       |
 | :calendar: | MacOS Support |        Allows for the manipulation of CoreAudio.        |      :x:       |
 

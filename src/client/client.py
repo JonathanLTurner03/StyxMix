@@ -1,8 +1,5 @@
 # zeroconf imports
 from zeroconf import Zeroconf
-import sys
-
-sys.path.append('../src')
 
 # Custom Module Imports
 import ServicesRegistry as Registry
@@ -11,11 +8,9 @@ from src.handlers import FileReader
 # 0MQ imports
 import zmq
 
-filemanager = FileReader()
-
 zeroconf = Zeroconf()
+filemanager = FileReader()
 config = filemanager.read_config()
-
 
 # Registers the service with the zeroconf instance.
 Registry.register(zeroconf, config['name'], config['zeroconf']['desc'],
@@ -71,5 +66,3 @@ while init_con is False:
 
     # Bind the socket to a specific port
     socket.bind(f"tcp://*:{config['zeroconf']['port']}")
-
-
