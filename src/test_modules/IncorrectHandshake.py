@@ -2,7 +2,7 @@
 from zeroconf import Zeroconf, ServiceBrowser
 
 from src.handlers import FileReader, ServicesMonitor
-import WindowsMixer as CoreAudio
+import src.server.WindowsMixer as CoreAudio
 
 import zmq
 import socket
@@ -31,7 +31,7 @@ desc = config['zeroconf']['desc'] + '.' + name
 
 def is_connected(zmq_socket, listener):
     try:
-        zmq_socket.send_string("StyxMix Handshake: Host IP," + listener.get_local_ipv4())
+        zmq_socket.send_string("StyxMix Handshake: Host IP,")
         message = zmq_socket.recv_string()
         if "StyxMix Handshake: Successful." in message:
             return True
