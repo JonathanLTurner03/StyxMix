@@ -15,7 +15,6 @@ sys.path.insert(0, handlers_dir)
 from handlers import FileReader, ServicesMonitor
 import NetworkingServices as Network
 
-
 zeroconf = Zeroconf()
 listener = ServicesMonitor()
 browser = ServiceBrowser(zeroconf, "_styxmix._tcp.local.", listener)
@@ -31,6 +30,16 @@ if config is False:
 audio = CoreAudio.AudioController()
 
 binding = Network.DeviceBinding()
-socket, context = binding.bind(config, listener)
+socket, context = binding.bind(config, zeroconf, listener)
 
-
+while True:
+    try:
+        message = socket.recv_string()
+        print(f"Received request: {message}")
+        socket.send_string("World")
+    except zmq.ZMQError as e:
+        print(f"Error: {e}")
+        break
+    except KeyboardInterrupt:
+        print("Exiting...")
+        break

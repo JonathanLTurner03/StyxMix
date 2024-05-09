@@ -64,6 +64,7 @@ class DeviceBinding:
         init_con = False
         while init_con is False:
             # Wait for next request from client
+            print("waiting for request...")
             message = self.socket.recv_string()
             print(f"Received request: {message}")
 

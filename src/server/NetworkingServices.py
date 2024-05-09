@@ -7,47 +7,47 @@ import socket
 
 class DeviceBinding:
 
-    zmqComms = None
+    socket = None
     context = None
-    zeroconf = None
 
     def __init__(self):
         self.context = zmq.Context()
-        self.zmqComms = self.context.socket(zmq.REP)
-        self.zeroconf = Zeroconf()
+        self.socket = self.context.socket(zmq.REQ)
 
-    def bind(self, config, listener) -> tuple:
+    def bind(self, config, zeroconf, listener) -> tuple:
         name = '_' + config['name'] + '._tcp.local.'
         desc = config['zeroconf']['desc'] + '.' + name
         bound = False
         while not bound:
-            services = self.zeroconf.get_service_info(name, desc)
+            services = zeroconf.get_service_info(name, desc)
             if services:
                 print(services.addresses)
                 for client in services.addresses:
                     ip_address = socket.inet_ntoa(client)
                     port = services.port
                     print(f"IP: {ip_address}, Port: {port}")
-                    self.zmqComms.connect(f"tcp://{ip_address}:{port}")
+                    self.socket.connect(f"tcp://{ip_address}:{port}")
+                    print(f"tpc://{ip_address}:{port}")
 
-                    if self.is_connected(listener, zmqComms=self.zmqComms):
+                    if self.is_connected(listener, zmqComms=self.socket):
                         print(f"Connected to client. IP: {ip_address}, Port: {port}")
-                        self.zmqComms.send_string("Connection Received.")
+                        self.socket.send_string("Connection Received.")
                         bound = True
                         break
                     else:
                         print("Handshake failed. Retrying in 5 seconds...")
-                        self.zmqComms.close()
+                        self.socket.close()
                         self.context.term()
 
                         self.context = zmq.Context()
-                        self.zmqComms = self.context.socket(zmq.REP)
+                        self.socket = self.context.socket(zmq.REP)
+                        time.sleep(5)
                         continue
             else:
                 print("No client found. Retrying in 5 seconds...")
                 time.sleep(5)
 
-        return self.zmqComms, self.context
+        return self.socket, self.context
 
     def is_connected(self, listener, zmqComms):
         try:
@@ -57,7 +57,18 @@ class DeviceBinding:
                 return True
         except zmq.Again:
             pass
-        except zmq.ZMQError:
-            print("Client is not waiting for a connection. Retrying in 5 seconds...")
-            time.sleep(5)
+        except zmq.ZMQError as e:
+            print(f"{e}")
         return False
+
+    def send_message(self, message):
+        self.socket.send_string(message)
+        reply = self.socket.recv_string()
+        print(f"Received reply: {reply}")
+        return reply
+
+    def recv_message(self) -> str:
+        message = self.socket.recv_string()
+        print(f"Received request: {message}")
+        self.socket.send_string("Message Received.")
+        return message
