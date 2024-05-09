@@ -30,7 +30,8 @@ Network.register(zeroconf, config['name'], config['zeroconf']['desc'],
 comms = Network.DeviceBinding()
 
 if config['multiple-hosts'] is False:
-    socket, context = comms.single_bind(config)
+    in_socket, context = comms.single_bind(config)
+    out_socket = comms.reverse_bind(config)
 else:
     # @TODO - Implement multiple host binding.
     pass

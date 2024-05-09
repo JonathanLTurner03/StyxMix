@@ -29,17 +29,7 @@ if config is False:
 
 audio = CoreAudio.AudioController()
 
-binding = Network.DeviceBinding()
-socket, context = binding.bind(config, zeroconf, listener)
+comms = Network.DeviceBinding()
+outsocket, context = comms.bind(config, zeroconf, listener)
 
-while True:
-    try:
-        message = socket.recv_string()
-        print(f"Received request: {message}")
-        socket.send_string("World")
-    except zmq.ZMQError as e:
-        print(f"Error: {e}")
-        break
-    except KeyboardInterrupt:
-        print("Exiting...")
-        break
+insocket = comms.reverse_bind(config, listener)

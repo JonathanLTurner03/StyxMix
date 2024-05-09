@@ -11,6 +11,7 @@
 zeroconf:
   enabled: true
   port: 18200
+  reverse-port: 18201
   desc: "Wireless Audio Mixer"
 
 # Basic configuration for Versioning, Authorship, and Description.
@@ -26,7 +27,8 @@ binding-lock:
   enabled: false
   host: [192.168.1.x]   # IP(s) of Hosts (i.e., Windows PC)
   client: 192.168.1.x   # IP of the Client Device (i.e., Raspberry Pi)
-  port: 18200           # Default Port
+  client-port: 18200           # Default Client Port
+  host-port: 18201             # Default Host Port
 
 multiple-hosts: false
 
