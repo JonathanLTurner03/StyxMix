@@ -4,7 +4,6 @@ import sys
 import os
 import WindowsMixer as CoreAudio
 import zmq
-import socket
 import time
 
 # Get the directory that contains the 'handlers' module
@@ -14,6 +13,7 @@ handlers_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..')
 sys.path.insert(0, handlers_dir)
 
 from handlers import FileReader, ServicesMonitor
+import NetworkingServices as Network
 
 
 zeroconf = Zeroconf()
@@ -30,49 +30,7 @@ if config is False:
 
 audio = CoreAudio.AudioController()
 
-context = zmq.Context()
-zmqComms = context.socket(zmq.REQ)
-
-name = '_' + config['name'] + '._tcp.local.'
-desc = config['zeroconf']['desc'] + '.' + name
+binding = Network.DeviceBinding()
+socket, context = binding.bind(config, listener)
 
 
-def is_connected(zmq_socket, listener):
-    try:
-        zmq_socket.send_string("StyxMix Handshake: Host IP," + listener.get_local_ipv4())
-        message = zmq_socket.recv_string()
-        if "StyxMix Handshake: Successful." in message:
-            return True
-    except zmq.Again:
-        pass
-    return False
-
-
-bound = False
-while not bound:
-    services = zeroconf.get_service_info(name, desc)
-    if services:
-        for client in services.addresses:
-            ip_address = socket.inet_ntoa(client)
-            port = services.port
-            zmqComms.connect(f"tcp://{ip_address}:{port}")
-
-            if is_connected(zmqComms, listener):
-                print(f"Connected to client. IP: {ip_address}, Port: {port}")
-                zmqComms.send_string("Connection Received.")
-                bound = True
-                break
-            else:
-                print("Handshake failed. Retrying in 5 seconds...")
-                zmqComms.close()
-                context.term()
-
-                context = zmq.Context()
-                zmqComms = context.socket(zmq.REP)
-                continue
-    else:
-        print("No client found. Retrying in 5 seconds...")
-        time.sleep(5)
-
-message = zmqComms.recv_string()
-print(f"Received request: {message}")
