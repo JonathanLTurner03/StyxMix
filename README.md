@@ -1,7 +1,7 @@
 # <h1 align="center">StyxMix</h1>
 <h3 align="center">A Simple Solution To An Annoying Problem</h3>
 <p align="center">
-<img src="">
+<img src="resources/StyxMix-PushBar.png" alt="StyxMix Banner" width="100%">
 </p>
 
 ---
